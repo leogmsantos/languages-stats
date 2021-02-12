@@ -18,6 +18,9 @@ public class GITRepositoryItemDTO implements DTO {
     @SerializedName("fullName")
     private String fullName;
 
+    @SerializedName("description")
+    private String description;
+
     public GITRepositoryItemDTO() {
     }
 
@@ -45,6 +48,14 @@ public class GITRepositoryItemDTO implements DTO {
         this.fullName = fullName;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     protected GITRepositoryItemDTO(Parcel in) {
         if (in.readByte() == 0) {
             id = null;
@@ -53,6 +64,7 @@ public class GITRepositoryItemDTO implements DTO {
         }
         name = in.readString();
         fullName = in.readString();
+        description = in.readString();
     }
 
     @Override
@@ -65,6 +77,7 @@ public class GITRepositoryItemDTO implements DTO {
         }
         dest.writeString(name);
         dest.writeString(fullName);
+        dest.writeString(description);
     }
 
     @Override
@@ -72,7 +85,7 @@ public class GITRepositoryItemDTO implements DTO {
         return 0;
     }
 
-    public static final Parcelable.Creator<GITRepositoryItemDTO> CREATOR = new Creator<GITRepositoryItemDTO>() {
+    public static final Creator<GITRepositoryItemDTO> CREATOR = new Creator<GITRepositoryItemDTO>() {
         @Override
         public GITRepositoryItemDTO createFromParcel(Parcel in) {
             return new GITRepositoryItemDTO(in);
@@ -83,4 +96,5 @@ public class GITRepositoryItemDTO implements DTO {
             return new GITRepositoryItemDTO[size];
         }
     };
+
 }

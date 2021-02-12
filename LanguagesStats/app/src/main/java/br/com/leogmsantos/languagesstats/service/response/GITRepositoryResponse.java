@@ -11,6 +11,7 @@ public class GITRepositoryResponse {
     @SerializedName("items")
     private List<GITRepositoryItemDTO> repositoryItemList;
 
+
     public GITRepositoryResponse() {
     }
 

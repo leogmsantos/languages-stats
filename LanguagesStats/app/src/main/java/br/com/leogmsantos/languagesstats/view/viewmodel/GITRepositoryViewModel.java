@@ -14,7 +14,6 @@ public class GITRepositoryViewModel extends ViewModel {
 
     private MutableLiveData<GITRepositoryResponse> responseMutableLiveData;
 
-
     public GITRepositoryViewModel() {
         responseMutableLiveData = new MutableLiveData<>();
     }

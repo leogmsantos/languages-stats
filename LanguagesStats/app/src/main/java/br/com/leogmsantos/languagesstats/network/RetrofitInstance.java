@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitInstance {
 
-    public static String BASE_URL = "https://api.github.com/search/";
+    public static String BASE_URL = "https://api.github.com/";
     public static Retrofit retrofit;
 
     public static Retrofit getRetrofitClient(){

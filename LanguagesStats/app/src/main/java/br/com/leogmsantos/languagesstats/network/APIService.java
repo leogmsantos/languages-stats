@@ -8,7 +8,7 @@ import retrofit2.http.Query;
 
 public interface APIService {
 
-    @GET("repositories")
+    @GET("search/repositories")
     Call<GITRepositoryResponse> getGitRepositoryList(@Query("q") String searchedLanguage,
                                                      @Query("sort") String selectedSort,
                                                      @Query("page") String pageNumber);
