@@ -1,1 +1,1 @@
-languages-stats
+Aplicativo de demonstração de arquitetura MVVM. 
