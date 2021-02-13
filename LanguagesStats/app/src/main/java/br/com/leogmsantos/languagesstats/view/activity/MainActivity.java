@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.CompoundButton;
 
 import java.util.List;
 
@@ -25,13 +26,39 @@ public class MainActivity extends AppCompatActivity {
     private GITRepositoryAdapter adapter;
     private ActivityMainBinding binding;
 
+    private String sortBy = "stars";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        initializeComponents();
         initializeRecycerView();
         initializeViewModelCall();
+    }
+
+    private void initializeComponents(){
+        binding.chipFilterForks.setOnClickListener(v ->{
+            binding.chipGroup.clearCheck();
+            binding.chipFilterForks.setChecked(true);
+            sortBy = "forks";
+            gitRepositoryViewModel.makeAPICall(sortBy);
+        });
+
+        binding.chipFilterName.setOnClickListener(v ->{
+            binding.chipGroup.clearCheck();
+            binding.chipFilterName.setChecked(true);
+            sortBy = "name";
+            gitRepositoryViewModel.makeAPICall(sortBy);
+        });
+
+        binding.chipFilterStars.setOnClickListener(v -> {
+            binding.chipGroup.clearCheck();
+            binding.chipFilterStars.setChecked(true);
+            sortBy = "stars";
+            gitRepositoryViewModel.makeAPICall(sortBy);
+        });
     }
 
     private void initializeRecycerView(){
@@ -52,6 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        gitRepositoryViewModel.makeAPICall();
+        gitRepositoryViewModel.makeAPICall(sortBy);
     }
 }
