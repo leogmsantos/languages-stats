@@ -21,6 +21,7 @@ import br.com.leogmsantos.languagesstats.databinding.ActivityMainBinding;
 import br.com.leogmsantos.languagesstats.model.dto.GITRepositoryItemDTO;
 import br.com.leogmsantos.languagesstats.service.response.GITRepositoryResponse;
 import br.com.leogmsantos.languagesstats.view.adapter.GITRepositoryAdapter;
+import br.com.leogmsantos.languagesstats.view.dialog.LoadingDialog;
 import br.com.leogmsantos.languagesstats.view.viewmodel.GITRepositoryViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        LoadingDialog.loading(this);
         initializeComponents();
         initializeRecycerView();
         initializeViewModelCall();
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             binding.chipFilterForks.setChecked(true);
             sortBy = "forks";
             gitRepositoryViewModel.makeAPICall(sortBy);
+            LoadingDialog.loading(this);
         });
 
         binding.chipFilterName.setOnClickListener(v ->{
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             binding.chipFilterName.setChecked(true);
             sortBy = "name";
             gitRepositoryViewModel.makeAPICall(sortBy);
+            LoadingDialog.loading(this);
         });
 
         binding.chipFilterStars.setOnClickListener(v -> {
@@ -62,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             binding.chipFilterStars.setChecked(true);
             sortBy = "stars";
             gitRepositoryViewModel.makeAPICall(sortBy);
+            LoadingDialog.loading(this);
         });
     }
 
@@ -80,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 if (gitRepositoryResponse != null){
                     response = gitRepositoryResponse;
                     adapter.setResponse(response);
+                    LoadingDialog.dismissLoading();
                 }
             }
         });
