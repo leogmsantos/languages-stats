@@ -3,6 +3,7 @@ package br.com.leogmsantos.languagesstats.view.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeViewModelCall(){
-        gitRepositoryViewModel = ViewModelProviders.of(this).get(GITRepositoryViewModel.class);
+        gitRepositoryViewModel =  new ViewModelProvider(this).get(GITRepositoryViewModel.class);
         gitRepositoryViewModel.getResponseObserver().observe(this, new Observer<GITRepositoryResponse>() {
             @Override
             public void onChanged(GITRepositoryResponse gitRepositoryResponse) {
