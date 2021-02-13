@@ -24,7 +24,7 @@ public class GITRepositoryViewModel extends ViewModel {
 
     public void makeAPICall(){
         APIService apiService = RetrofitInstance.getRetrofitClient().create(APIService.class);
-        Call<GITRepositoryResponse> call = apiService.getGitRepositoryList("language:Java","stars", "1");
+        Call<GITRepositoryResponse> call = apiService.getGitRepositoryList("language:Java","name", "1");
         call.enqueue(new Callback<GITRepositoryResponse>() {
             @Override
             public void onResponse(Call<GITRepositoryResponse> call, Response<GITRepositoryResponse> response) {

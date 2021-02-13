@@ -21,6 +21,15 @@ public class GITRepositoryItemDTO implements DTO {
     @SerializedName("description")
     private String description;
 
+    @SerializedName("owner")
+    private GITRepositoryOwnerDTO owner;
+
+    @SerializedName("forks")
+    private Integer forks;
+
+    @SerializedName("watchers")
+    private Integer watchers;
+
     public GITRepositoryItemDTO() {
     }
 
@@ -56,6 +65,30 @@ public class GITRepositoryItemDTO implements DTO {
         this.description = description;
     }
 
+    public GITRepositoryOwnerDTO getOwner() {
+        return owner;
+    }
+
+    public void setOwner(GITRepositoryOwnerDTO owner) {
+        this.owner = owner;
+    }
+
+    public Integer getForks() {
+        return forks;
+    }
+
+    public void setForks(Integer forks) {
+        this.forks = forks;
+    }
+
+    public Integer getWatchers() {
+        return watchers;
+    }
+
+    public void setWatchers(Integer watchers) {
+        this.watchers = watchers;
+    }
+
     protected GITRepositoryItemDTO(Parcel in) {
         if (in.readByte() == 0) {
             id = null;
@@ -65,6 +98,17 @@ public class GITRepositoryItemDTO implements DTO {
         name = in.readString();
         fullName = in.readString();
         description = in.readString();
+        owner = in.readParcelable(GITRepositoryOwnerDTO.class.getClassLoader());
+        if (in.readByte() == 0) {
+            forks = null;
+        } else {
+            forks = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            watchers = null;
+        } else {
+            watchers = in.readInt();
+        }
     }
 
     @Override
@@ -78,6 +122,19 @@ public class GITRepositoryItemDTO implements DTO {
         dest.writeString(name);
         dest.writeString(fullName);
         dest.writeString(description);
+        dest.writeParcelable(owner, flags);
+        if (forks == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(forks);
+        }
+        if (watchers == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(watchers);
+        }
     }
 
     @Override
@@ -96,5 +153,4 @@ public class GITRepositoryItemDTO implements DTO {
             return new GITRepositoryItemDTO[size];
         }
     };
-
 }
