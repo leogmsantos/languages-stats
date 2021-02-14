@@ -1,5 +1,6 @@
 package br.com.leogmsantos.languagesstats.view.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,7 @@ public class GITRepositoryAdapter extends RecyclerView.Adapter<GITRepositoryAdap
         return new MyViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         if (response.getRepositoryItemList().size() > 0){
@@ -55,7 +57,7 @@ public class GITRepositoryAdapter extends RecyclerView.Adapter<GITRepositoryAdap
             holder.itemDescription.setText(response.getRepositoryItemList().get(position).getDescription());
             holder.itemForkCount.setText(response.getRepositoryItemList().get(position).getForks().toString());
             holder.itemFavouriteCount.setText(response.getRepositoryItemList().get(position).getWatchers().toString());
-
+            holder.itemUsername.setText(response.getRepositoryItemList().get(position).getOwner().getLogin());
             Glide.with(context)
                     .load(response.getRepositoryItemList().get(position).getOwner().getAvatarUrl())
                     .apply(RequestOptions.centerCropTransform())
@@ -111,7 +113,7 @@ public class GITRepositoryAdapter extends RecyclerView.Adapter<GITRepositoryAdap
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView itemTitle, itemDescription, itemForkCount, itemFavouriteCount;
+        private TextView itemTitle, itemDescription, itemForkCount, itemFavouriteCount, itemUsername;
         private ImageView ivAvatar;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -121,6 +123,7 @@ public class GITRepositoryAdapter extends RecyclerView.Adapter<GITRepositoryAdap
             ivAvatar = itemView.findViewById(R.id.iv_avatar);
             itemForkCount = itemView.findViewById(R.id.tv_fork_count);
             itemFavouriteCount = itemView.findViewById(R.id.tv_favourite_count);
+            itemUsername = itemView.findViewById(R.id.tv_username);
         }
     }
 }

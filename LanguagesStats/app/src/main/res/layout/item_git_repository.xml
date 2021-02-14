@@ -105,6 +105,14 @@
                 app:shapeAppearanceOverlay="@style/Circular"
                 app:strokeWidth="4dp"/>
 
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/azul_claro"
+                tools:text="Leonardo"/>
+
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

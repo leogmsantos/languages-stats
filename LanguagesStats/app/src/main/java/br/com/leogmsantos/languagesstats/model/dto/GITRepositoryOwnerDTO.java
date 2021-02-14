@@ -13,6 +13,9 @@ public class GITRepositoryOwnerDTO implements Parcelable {
     @SerializedName("url")
     private String url;
 
+    @SerializedName("login")
+    private String login;
+
     public GITRepositoryOwnerDTO() {
     }
 
@@ -32,15 +35,25 @@ public class GITRepositoryOwnerDTO implements Parcelable {
         this.url = url;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     protected GITRepositoryOwnerDTO(Parcel in) {
         avatarUrl = in.readString();
         url = in.readString();
+        login = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(avatarUrl);
         dest.writeString(url);
+        dest.writeString(login);
     }
 
     @Override
